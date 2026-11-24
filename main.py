@@ -11,7 +11,15 @@ ENTRY = (
 )
 
 
+def validate_entry(entry: str) -> None:
+    """Gate: entry must be exactly one line, one sentence, under 200 chars."""
+    assert "\n" not in entry, "entry must be a single line"
+    assert entry.count(".") == 1 and entry.endswith("."), "entry must be one sentence"
+    assert len(entry) < 200, f"entry must be <200 chars, got {len(entry)}"
+
+
 def main():
+    validate_entry(ENTRY)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(ENTRY + "\n")
 
